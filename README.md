@@ -9,16 +9,16 @@ This package utilizes several icons from the [Heroicons UI](https://github.com/s
 
 ## Installation
 
-You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
+You can install the package using composer:
 
 ```bash
 composer require wesselperik/nova-status-field
 ```
 
-Next up, add the tool to your desired Nova model. Do this like so:
+Next up, add the field to your desired Nova model. See the example below:
 
 ```php
-// for example, in app/Nova/User.php
+// for example, in app/Nova/Post.php
 
 use WesselPerik\StatusField\StatusField;
 
@@ -28,11 +28,11 @@ public function fields(Request $request) {
     return [
         // ...
 
-        StatusField::make('Status')
+        StatusField::make('Published')
                 ->values([
-                    'inactive'  => $this->active == 0,
-                    'pending'   => $this->active == 1 && $this->approved == 0,
-                    'active'    => $this->active == 1 && $this->approved == 1
+                    'inactive'  => $this->published == 0 || $this->published_at == null,
+                    'pending'   => $this->published == 1 && $this->published_at => now(),
+                    'active'    => $this->published == 1 && $this->published_at < now()
                 ])
                 ->exceptOnForms()
     ];
