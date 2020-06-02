@@ -1,0 +1,30 @@
+{
+    "name": "wesselperik/nova-status-field",
+    "description": "A Laravel Nova field for displaying statuses.",
+    "keywords": [
+        "laravel",
+        "status",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WesselPerik\\StatusField\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WesselPerik\\StatusField\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
