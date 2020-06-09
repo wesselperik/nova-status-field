@@ -1,4 +1,5 @@
-# Nova Status Field
+<img src="../assets/logo.png?raw=true" alt="Nova Status Field" width="500"/>
+<hr>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wesselperik/nova-status-field.svg?style=flat-square)](https://packagist.org/packages/wesselperik/nova-status-field)
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
