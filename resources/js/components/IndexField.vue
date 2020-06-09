@@ -1,6 +1,6 @@
 <template>
     <td style="border: 0;">
-        <div class="text-center">
+        <div class="text-center" v-tooltip="{'content': field.tooltip, 'placement': 'top'}">
             <component :is="getValue()" />
         </div>
     </td>
@@ -8,6 +8,7 @@
 
 <script>
 import * as components from './icons'
+import VTooltip from 'v-tooltip'
 
 export default {
     props: ['resourceName', 'field'],

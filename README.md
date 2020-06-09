@@ -4,7 +4,7 @@
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
 
 
-A Laravel Nova field for displaying a status icon on index and detail pages of your models.
+A Laravel Nova field for displaying a status icon, with optional tooltip, on index and detail pages of your models.
 This package utilizes several icons from the [Heroicons UI](https://github.com/sschoger/heroicons-ui) icon pack (from designer [Steve Schroger](https://twitter.com/steveschoger)), which is also used in Laravel Nova.
 
 ## Installation
@@ -34,6 +34,7 @@ public function fields(Request $request) {
                     'pending'   => $this->published == 1 && $this->published_at => now(),
                     'active'    => $this->published == 1 && $this->published_at < now()
                 ])
+                ->tooltip("Super awesome tooltip!")
                 ->exceptOnForms()
     ];
 }
@@ -48,4 +49,4 @@ Available values (with matching icons) are:
 
 ## License
 
-The MIT License (MIT). Please see the [license file](LICENSE.md) for more information.
+The MIT License (MIT). Please see the [license file](LICENSE) for more information.

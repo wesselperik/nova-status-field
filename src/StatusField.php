@@ -6,6 +6,9 @@ use Laravel\Nova\Fields\Field;
 
 class StatusField extends Field
 {
+    public $showOnCreation = false;
+    public $showOnUpdate = false;
+
     /**
      * The field's component.
      *
@@ -22,5 +25,16 @@ class StatusField extends Field
     public function values(array $values = null)
     {
         return $this->withMeta(['values' => $values]);
+    }
+
+    /**
+     * Add a tooltip to the field.
+     *
+     * @param string $value
+     * @return $this
+     */
+    public function tooltip(string $value = null)
+    {
+        return $this->withMeta(['tooltip' => $value]);
     }
 }

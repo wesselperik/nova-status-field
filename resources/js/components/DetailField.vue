@@ -3,7 +3,7 @@
         <div class="w-1/4 py-4">
             <h4 class="font-normal text-80">{{ field.name }}</h4>
         </div>
-        <div class="w-3/4 py-4 break-words">
+        <div class="w-3/4 py-4 break-words" v-tooltip="{'content': field.tooltip, 'placement': 'left'}">
             <component :is="getValue()" />
         </div>
     </div>
@@ -11,6 +11,7 @@
 
 <script>
 import * as components from './icons'
+import VTooltip from 'v-tooltip'
 
 export default {
     props: ['resource', 'resourceName', 'resourceId', 'field'],
