@@ -19,7 +19,7 @@ class StatusField extends Field
      * @param array $values
      * @return $this
      */
-    public function values(array $values)
+    public function values(array $values = null)
     {
         return $this->withMeta(['values' => $values]);
     }
