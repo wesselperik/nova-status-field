@@ -1,4 +1,4 @@
-<img src="../assets/logo.png?raw=true" alt="Nova Status Field" width="500"/>
+<img src="https://raw.githubusercontent.com/wesselperik/nova-status-field/assets/logo.png" alt="Nova Status Field" width="500"/>
 <hr>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wesselperik/nova-status-field.svg?style=flat-square)](https://packagist.org/packages/wesselperik/nova-status-field)
