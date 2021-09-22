@@ -37,4 +37,16 @@ class StatusField extends Field
     {
         return $this->withMeta(['tooltip' => $value]);
     }
+
+    /**
+     * Add some extra field information on the detail view.
+     * 
+     * @param string $value
+     * @param bool $displayTooltip
+     * @return $this
+     */
+    public function info(string $value = null, bool $displayTooltip = false)
+    {
+        return $this->withMeta(['info' => $value, 'display_tooltip' => $displayTooltip]);
+    }
 }

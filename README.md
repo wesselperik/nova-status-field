@@ -5,8 +5,8 @@
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
 
 
-A Laravel Nova field for displaying a status icon, with optional tooltip, on index and detail pages of your models.
-This package utilizes several icons from the [Heroicons UI](https://github.com/sschoger/heroicons-ui) icon pack (from designer [Steve Schroger](https://twitter.com/steveschoger)), which is also used in Laravel Nova.
+A Laravel Nova field for displaying a status icon, with optional tooltip and info text, on index and detail pages of your models.
+This package utilizes several icons from the [Heroicons UI](https://heroicons.com/) icon pack (from designer [Steve Schroger](https://twitter.com/steveschoger)), which is also used in Laravel Nova.
 
 ## Installation
 
@@ -31,22 +31,24 @@ public function fields(Request $request) {
 
         StatusField::make('Published')
                 ->values([
-                    'inactive'  => $this->published == 0 || $this->published_at == null,
-                    'pending'   => $this->published == 1 && $this->published_at => now(),
-                    'active'    => $this->published == 1 && $this->published_at < now()
+                    'inactive'  => $this->published == 0,
+                    'pending'   => $this->pending == 1,
+                    'active'    => $this->published == 1
                 ])
                 ->tooltip("Super awesome tooltip!")
+                ->info("Some extra info on the detail view")
                 ->exceptOnForms()
     ];
 }
 ```
 Available values (with matching icons) are:
-- inactive
-- active
-- pending
-- info
-- warning
-- help
+- inactive (cross)
+- active (checkmark)
+- pending (clock)
+- info (info icon)
+- warning (exclamation mark)
+- help (questionmark)
+- disabled (minus)
 
 ## License
 
