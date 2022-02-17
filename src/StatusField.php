@@ -30,10 +30,10 @@ class StatusField extends Field
     /**
      * Add a tooltip to the field.
      *
-     * @param string $value
+     * @param string|array $value
      * @return $this
      */
-    public function tooltip(string $value = null)
+    public function tooltip(string|array $value = null)
     {
         return $this->withMeta(['tooltip' => $value]);
     }
@@ -41,11 +41,11 @@ class StatusField extends Field
     /**
      * Add some extra field information on the detail view.
      * 
-     * @param string $value
+     * @param string|array $value
      * @param bool $displayTooltip
      * @return $this
      */
-    public function info(string $value = null, bool $displayTooltip = false)
+    public function info(string|array $value = null, bool $displayTooltip = false)
     {
         return $this->withMeta(['info' => $value, 'display_tooltip' => $displayTooltip]);
     }

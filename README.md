@@ -19,7 +19,7 @@ composer require wesselperik/nova-status-field
 Next up, add the field to your desired Nova model. See the example below:
 
 ```php
-// for example, in app/Nova/Post.php
+// for example, in app/Nova/Blog.php
 
 use WesselPerik\StatusField\StatusField;
 
@@ -27,17 +27,35 @@ use WesselPerik\StatusField\StatusField;
 
 public function fields(Request $request) {
     return [
-        // ...
-
+        // Use a single value for tooltips and info...
         StatusField::make('Published')
-                ->values([
-                    'inactive'  => $this->published == 0,
-                    'pending'   => $this->pending == 1,
-                    'active'    => $this->published == 1
-                ])
-                ->tooltip("Super awesome tooltip!")
-                ->info("Some extra info on the detail view")
-                ->exceptOnForms()
+            ->values([
+                'inactive'  => $this->published == 0,
+                'pending'   => $this->pending == 1 && $this->published == 0,
+                'active'    => $this->pending == 0 && $this->published == 1
+            ])
+            ->tooltip($this->status) // optional
+            ->info("Blog status: ".$this->status) // optional
+            ->exceptOnForms()
+
+        // ...or change text based on the value
+        StatusField::make('Published')
+            ->values([
+                'inactive'  => $this->published == 0,
+                'pending'   => $this->pending == 1 && $this->published == 0,
+                'active'    => $this->pending == 0 && $this->published == 1
+            ])
+            ->tooltip([
+                'inactive'  => 'Not published',
+                'pending'   => 'Pending publication',
+                'active'    => 'Published'
+            ])
+            ->info([
+                'inactive'  => 'This blog is not published yet.',
+                'pending'   => 'This blog is pending publication.',
+                'active'    => 'This blog is published on '.$this->published_at->format('d-m-Y').'.'
+            ])
+            ->exceptOnForms()
     ];
 }
 ```

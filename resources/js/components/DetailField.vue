@@ -4,16 +4,16 @@
             <h4 class="font-normal text-80">{{ field.name }}</h4>
         </div>
         <div class="w-3/4 py-4 break-words">
-            <div class="component-wrapper" v-tooltip="{'content': field.tooltip, 'placement': 'top'}" v-if="!field.info">
+            <div class="component-wrapper" v-tooltip="{'content': getTooltip(), 'placement': 'top'}" v-if="!field.info">
                 <component :is="getValue()" />
             </div>
             <template v-else>
                 <div class="info">
-                    <div class="component-wrapper" v-tooltip="{'content': field.tooltip, 'placement': 'top'}" v-if="field.display_tooltip">
+                    <div class="component-wrapper" v-tooltip="{'content': getTooltip(), 'placement': 'top'}" v-if="field.display_tooltip">
                         <component :is="getValue()" />
                     </div>
                     <component :is="getValue()" v-else />
-                    <span class="pl-2">{{ field.info }}</span>
+                    <span class="pl-2">{{ getInfo() }}</span>
                 </div>
             </template>
         </div>
@@ -48,6 +48,18 @@ export default {
         getValue: function() {
             if (!this.field.values) return this.field.value;
             return Object.keys(this.field.values).filter(k => this.field.values[k])[0];
+        },
+        getTooltip: function() {
+            if (this.field.tooltip) {
+                if (typeof this.field.tooltip == "string") return this.field.tooltip;
+                else return this.field.tooltip[this.getValue()];
+            }
+        },
+        getInfo: function() {
+            if (this.field.info) {
+                if (typeof this.field.info == "string") return this.field.info;
+                else return this.field.info[this.getValue()];
+            }
         }
     }
 }
