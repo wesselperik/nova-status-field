@@ -4,6 +4,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wesselperik/nova-status-field.svg?style=flat-square)](https://packagist.org/packages/wesselperik/nova-status-field)
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
 
+### 🚀 Compatible with Laravel Nova 4.0!
 
 A Laravel Nova field for displaying a status icon, with optional tooltip and info text, on index and detail pages of your models.
 This package utilizes several icons from the [Heroicons UI](https://heroicons.com/) icon pack (from designer [Steve Schroger](https://twitter.com/steveschoger)), which is also used in Laravel Nova.

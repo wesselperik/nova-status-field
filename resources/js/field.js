@@ -1,7 +1,9 @@
-import IndexField from "./components/IndexField.vue";
-import DetailField from "./components/DetailField.vue";
+import IndexField from "./components/IndexField";
+import DetailField from "./components/DetailField";
+import Popper from "vue3-popper";
 
-Nova.booting((Vue, router, store) => {
-  Vue.component('index-status-field', IndexField)
-  Vue.component('detail-status-field', DetailField)
+Nova.booting((app, store) => {
+  app.component('index-status-field', IndexField)
+  app.component('detail-status-field', DetailField)
+  app.component('popper', Popper)
 })

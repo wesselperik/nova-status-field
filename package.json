@@ -10,18 +10,16 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "cross-env": "^5.0.0",
-        "laravel-mix": "^6.0.42",
-        "laravel-nova": "^1.0",
+        "@vue/compiler-sfc": "^3.2.22",
+        "form-backend-validation": "^2.3.3",
+        "laravel-mix": "^6.0.41",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.49.8",
         "sass-loader": "^12.6.0",
-        "vue-loader": "^15.9.8",
-        "vue-svg-loader": "^0.10.0",
-        "vue-template-compiler": "^2.6.11"
+        "vue-loader": "^16.8.3",
+        "vue-svg-loader": "^0.10.0"
     },
     "dependencies": {
-        "v-tooltip": "^2.0.3",
-        "vue": "^2.5.0"
+        "vue3-popper": "^1.4.2"
     }
 }

@@ -1,45 +1,30 @@
 <template>
-    <div class="flex border-b border-40">
-        <div class="w-1/4 py-4">
-            <h4 class="font-normal text-80">{{ field.name }}</h4>
-        </div>
-        <div class="w-3/4 py-4 break-words">
-            <div class="component-wrapper" v-tooltip="{'content': getTooltip(), 'placement': 'top'}" v-if="!field.info">
-                <component :is="getValue()" />
+    <PanelItem :index="index" :field="field">
+        <template v-slot:value>
+            <div v-if="!field.info" class="field">
+                <popper hover placement="right" :content="getTooltip()">
+                    <component :is="getValue()" />
+                </popper>
             </div>
-            <template v-else>
-                <div class="info">
-                    <div class="component-wrapper" v-tooltip="{'content': getTooltip(), 'placement': 'top'}" v-if="field.display_tooltip">
-                        <component :is="getValue()" />
-                    </div>
-                    <component :is="getValue()" v-else />
-                    <span class="pl-2">{{ getInfo() }}</span>
-                </div>
-            </template>
-        </div>
-    </div>
+            <div v-else class="field">
+                <popper hover placement="right" :content="getTooltip()" v-if="field.display_tooltip">
+                    <component :is="getValue()" />
+                </popper>
+                <component :is="getValue()" v-else />
+                <p class="text-90 ml-2">{{ getInfo() }}</p>
+            </div>
+        </template>
+    </PanelItem>
 </template>
 <style lang="scss" scoped>
-    .component-wrapper {
-        display: inline-block;
-        height: 24px;
-    }
-    .info {
-        display: flex;
-        align-items: center;
-
-        span {
-            margin-top: 2px;
-        }
-
-        svg {
-            overflow: unset;
-        }
-    }
+    // svg {
+    //     height: 24px;
+    //     top: -2px;
+    //     position: relative;
+    // }
 </style>
 <script>
 import * as components from './icons'
-import VTooltip from 'v-tooltip'
 
 export default {
     props: ['resource', 'resourceName', 'resourceId', 'field'],

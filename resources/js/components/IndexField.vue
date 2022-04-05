@@ -1,14 +1,13 @@
 <template>
-    <td style="border: 0;">
-        <div class="text-center" v-tooltip="{'content': getTooltip(), 'placement': 'top'}">
+    <div class="flex text-left">
+        <popper hover :content="getTooltip()">
             <component :is="getValue()" />
-        </div>
-    </td>
+        </popper>
+    </div>
 </template>
 
 <script>
 import * as components from './icons'
-import VTooltip from 'v-tooltip'
 
 export default {
     props: ['resourceName', 'field'],
