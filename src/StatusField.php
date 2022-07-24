@@ -56,7 +56,7 @@ class StatusField extends Field
      * @param string|array $value
      * @return $this
      */
-    public function color(string|array $value = null)
+    public function color(string|array $value = 'current')
     {
         return $this->withMeta(['color' => $value]);
     }

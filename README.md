@@ -31,43 +31,46 @@ public function fields(Request $request) {
         // Use a single value for tooltips and info...
         StatusField::make('Published')
             ->values([
-                'inactive'  => $this->published == 0,
-                'pending'   => $this->pending == 1 && $this->published == 0,
-                'active'    => $this->pending == 0 && $this->published == 1
+                'minus-circle'  => $this->published == 0,
+                'question-mark-circle'   => $this->pending == 1 && $this->published == 0,
+                'check-circle'    => $this->pending == 0 && $this->published == 1
             ])
             ->tooltip($this->status) // optional
+            ->color('primary')
             ->info("Blog status: ".$this->status) // optional
             ->exceptOnForms()
 
         // ...or change text based on the value
         StatusField::make('Published')
             ->values([
-                'inactive'  => $this->published == 0,
-                'pending'   => $this->pending == 1 && $this->published == 0,
-                'active'    => $this->pending == 0 && $this->published == 1
+                'minus-circle'  => $this->published == 0,
+                'question-mark-circle'   => $this->pending == 1 && $this->published == 0,
+                'check-circle'    => $this->pending == 0 && $this->published == 1
             ])
             ->tooltip([
-                'inactive'  => 'Not published',
-                'pending'   => 'Pending publication',
-                'active'    => 'Published'
+                'minus-circle'  => 'Not published',
+                'question-mark-circle'   => 'Pending publication',
+                'check-circle'    => 'Published'
             ])
             ->info([
-                'inactive'  => 'This blog is not published yet.',
-                'pending'   => 'This blog is pending publication.',
-                'active'    => 'This blog is published on '.$this->published_at->format('d-m-Y').'.'
+                'minus-circle'  => 'This blog is not published yet.',
+                'question-mark-circle'   => 'This blog is pending publication.',
+                'check-circle'    => 'This blog is published on '.$this->published_at->format('d-m-Y').'.'
+            ])
+            ->color([
+                'minus-circle'  => 'red-500',
+                'question-mark-circle'   => 'current',
+                'check-circle'    => 'green-500'
             ])
             ->exceptOnForms()
     ];
 }
 ```
-Available values (with matching icons) are:
-- inactive (cross)
-- active (checkmark)
-- pending (clock)
-- info (info icon)
-- warning (exclamation mark)
-- help (questionmark)
-- disabled (minus)
+Available icons are:
+[https://heroicons.com/](Hero Icons)
+
+Available colors are:
+[https://tailwindcss.com/docs/text-color](TailwindCSS Text Colors)
 
 ## License
 
