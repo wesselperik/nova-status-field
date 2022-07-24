@@ -3,12 +3,12 @@
         <template v-slot:value>
             <div v-if="!field.info" class="field">
                 <popper hover placement="right" :content="getTooltip()">
-                    <component :is="getValue()" />
+                    <Icon :solid="this.field.solidIcon" :type="getValue()" :class="getColor()" />
                 </popper>
             </div>
             <div v-else class="field">
                 <popper hover placement="right" :content="getTooltip()" v-if="field.display_tooltip">
-                    <component :is="getValue()" />
+                    <Icon :solid="this.field.solidIcon" :type="getValue()" :class="getColor()" />
                 </popper>
                 <component :is="getValue()" v-else />
                 <p class="text-90 ml-2">{{ getInfo() }}</p>
@@ -16,19 +16,9 @@
         </template>
     </PanelItem>
 </template>
-<style lang="scss" scoped>
-    // svg {
-    //     height: 24px;
-    //     top: -2px;
-    //     position: relative;
-    // }
-</style>
 <script>
-import * as components from './icons'
-
 export default {
     props: ['resource', 'resourceName', 'resourceId', 'field'],
-    components,
     methods: {
         getValue: function() {
             if (!this.field.values) return this.field.value;
@@ -45,7 +35,13 @@ export default {
                 if (typeof this.field.info == "string") return this.field.info;
                 else return this.field.info[this.getValue()];
             }
-        }
+        },
+        getColor: function() {
+            if (this.field.color) {
+                if (typeof this.field.color == "string") return 'text-' + this.field.color;
+                else return 'text-' + this.field.color[this.getValue()];
+            }
+        },
     }
 }
 </script>

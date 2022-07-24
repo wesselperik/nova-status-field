@@ -40,7 +40,7 @@ class StatusField extends Field
 
     /**
      * Add some extra field information on the detail view.
-     * 
+     *
      * @param string|array $value
      * @param bool $displayTooltip
      * @return $this
@@ -49,4 +49,27 @@ class StatusField extends Field
     {
         return $this->withMeta(['info' => $value, 'display_tooltip' => $displayTooltip]);
     }
+
+    /**
+     * Add custom colors to icons.
+     *
+     * @param string|array $value
+     * @return $this
+     */
+    public function color(string|array $value = null)
+    {
+        return $this->withMeta(['color' => $value]);
+    }
+
+    /**
+     * Add custom colors to icons.
+     *
+     * @param bool $value
+     * @return $this
+     */
+    public function solidIcon(bool $value = false)
+    {
+        return $this->withMeta(['solidIcon' => $value]);
+    }
+
 }
