@@ -30,24 +30,29 @@ class StatusField extends Field
     /**
      * Add a tooltip to the field.
      *
-     * @param string|array $value
+     * @param string|array|\BackedEnum $value
      * @return $this
      */
-    public function tooltip(string|array $value = null)
+    public function tooltip(string|array|\BackedEnum $value = null)
     {
-        return $this->withMeta(['tooltip' => $value]);
+        return $this->withMeta([
+            'tooltip' => ($value instanceof \BackedEnum) ? $value->value : $value,
+        ]);
     }
 
     /**
      * Add some extra field information on the detail view.
      *
-     * @param string|array $value
+     * @param string|array|\BackedEnum $value
      * @param bool $displayTooltip
      * @return $this
      */
-    public function info(string|array $value = null, bool $displayTooltip = false)
+    public function info(string|array|\BackedEnum $value = null, bool $displayTooltip = false)
     {
-        return $this->withMeta(['info' => $value, 'display_tooltip' => $displayTooltip]);
+        return $this->withMeta([
+            'info' => ($value instanceof \BackedEnum) ? $value->value : $value,
+            'display_tooltip' => $displayTooltip
+        ]);
     }
 
     /**
