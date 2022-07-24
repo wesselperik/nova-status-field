@@ -10,7 +10,7 @@
                 <popper hover placement="right" :content="getTooltip()" v-if="field.display_tooltip">
                     <Icon :solid="this.field.solidIcon" :type="getValue()" :class="getColor()" />
                 </popper>
-                <component :is="getValue()" v-else />
+                <Icon :solid="this.field.solidIcon" :type="getValue()" :class="getColor()" v-else />
                 <p class="text-90 ml-2">{{ getInfo() }}</p>
             </div>
         </template>
