@@ -1,7 +1,7 @@
 <template>
     <div>
         <popper hover :content="getTooltip()">
-            <Icon :solid="this.field.solidIcon" :type="getValue()" :class="getColor()" />
+            <Icon :solid="this.field.solid_icon" :type="getValue()" :class="getColor()" />
         </popper>
     </div>
 </template>
