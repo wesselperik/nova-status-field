@@ -1,17 +1,14 @@
 <template>
-    <div class="flex text-left">
+    <div>
         <popper hover :content="getTooltip()">
-            <component :is="getValue()" />
+            <Icon :solid="this.field.solid_icon" :type="getValue()" :class="getColor()" />
         </popper>
     </div>
 </template>
 
 <script>
-import * as components from './icons'
-
 export default {
     props: ['resourceName', 'field'],
-    components,
     methods: {
         getValue: function() {
             if (!this.field.values) return this.field.value;
@@ -22,7 +19,13 @@ export default {
                 if (typeof this.field.tooltip == "string") return this.field.tooltip;
                 else return this.field.tooltip[this.getValue()];
             }
-        }
+        },
+        getColor: function() {
+            if (this.field.color) {
+                if (typeof this.field.color == "string") return 'text-' + this.field.color;
+                else return 'text-' + this.field.color[this.getValue()];
+            }
+        },
     }
 }
 </script>
