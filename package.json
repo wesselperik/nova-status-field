@@ -20,6 +20,6 @@
         "vue-svg-loader": "^0.10.0"
     },
     "dependencies": {
-        "vue3-popper": "^1.4.2"
+        "vue3-popper": "^1.5.0"
     }
 }

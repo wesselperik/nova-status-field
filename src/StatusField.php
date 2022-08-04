@@ -14,7 +14,7 @@ class StatusField extends Field
      *
      * @var string
      */
-    public $component = 'status-field';
+    public $component = 'nova-status-field';
 
     /**
      * Define the icons to use for each status.

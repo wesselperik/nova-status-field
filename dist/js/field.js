@@ -234,8 +234,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Nova.booting(function (app, store) {
-  app.component('index-status-field', _components_IndexField__WEBPACK_IMPORTED_MODULE_0__["default"]);
-  app.component('detail-status-field', _components_DetailField__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  app.component('index-nova-status-field', _components_IndexField__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  app.component('detail-nova-status-field', _components_DetailField__WEBPACK_IMPORTED_MODULE_1__["default"]);
   app.component('popper', vue3_popper__WEBPACK_IMPORTED_MODULE_2__["default"]);
 });
 
