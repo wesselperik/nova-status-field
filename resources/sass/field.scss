@@ -20,7 +20,9 @@
 }
 
 .field {
-  height: 24px;
   display: flex;
-  align-items: center;
+
+  svg {
+    margin-top: -2px;
+  }
 }

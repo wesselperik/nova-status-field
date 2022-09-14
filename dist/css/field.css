@@ -21,7 +21,8 @@
 }
 
 .field {
-  height: 24px;
   display: flex;
-  align-items: center;
+}
+.field svg {
+  margin-top: -2px;
 }
