@@ -77,10 +77,31 @@ Available colors are the following [TailwindCSS text colors](https://tailwindcss
 - `green`
 - `red`
 
+To force display info data on index view. Use *displayInfoOnIndex* method
+
+```php
+StatusField::make('Published')
+            ->icons([
+                'minus-circle' => $this->published == 0,
+                'clock'        => $this->pending == 1 && $this->published == 0,
+                'check-circle' => $this->pending == 0 && $this->published == 1
+            ])
+            ->displayInfoOnIndex()
+```
+
+By default text is truncate to 50 characters. Passing parameter to *displayInfoOnIndex* method allow to change maxlength limit.
+
+```php
+...
+            ->displayInfoOnIndex(10)
+...
+```
+
 ## Contributors
 
 - [Wessel Perik](https://github.com/wesselperik)
 - [Jeremy Holstein](https://github.com/jjjrmy)
+- [Sebastien Cramatte](https://github.com/operativeit)
 
 ## License
 
