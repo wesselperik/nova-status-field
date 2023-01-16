@@ -84,6 +84,17 @@ class StatusField extends Field
     }
 
     /**
+     * Force display on index view
+     *
+     * @param bool $solid
+     * @return $this
+     */
+    public function displayInfoOnIndex($maxlength = 50)
+    {
+        return $this->withMeta(['info_on_index' => true, 'info_on_index_maxlength' => $maxlength ]);
+    }
+
+    /**
      * Define the icon values to use for each status.
      * 
      * @deprecated since version 2.1.0. Use icons() instead.
