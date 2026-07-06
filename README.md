@@ -2,7 +2,6 @@
 <hr>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wesselperik/nova-status-field.svg?style=flat-square)](https://packagist.org/packages/wesselperik/nova-status-field)
-[![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
 
 ### 🚀 Compatible with Laravel Nova 4 and 5!
 
@@ -35,7 +34,7 @@ public function fields(Request $request) {
                 'clock'        => $this->pending == 1 && $this->published == 0,
                 'check-circle' => $this->pending == 0 && $this->published == 1
             ])
-            ->color('primary') // optional
+            ->iconColor('primary') // optional
             ->solid(true) // optional
             ->tooltip($this->status) // optional
             ->info("Blog status: ".$this->status) // optional
@@ -58,7 +57,7 @@ public function fields(Request $request) {
                 'clock'        => 'This blog is pending publication.',
                 'check-circle' => 'This blog is published on '.$this->published_at->format('d-m-Y').'.'
             ])
-            ->color([
+            ->iconColor([
                 'minus-circle' => 'red-500',
                 'clock'        => 'blue-500',
                 'check-circle' => 'green-500'
@@ -78,6 +77,49 @@ Available colors are the following [TailwindCSS text colors](https://tailwindcss
 - `blue`
 - `green`
 - `red`
+
+## Popup text/background color
+
+By default the tooltip popup uses your Nova `primary` color as its background, with white text (dark gray in dark mode). Use `background()` and `textColor()` to override these per field. Both work exactly like `iconColor()` — pass either a single color or an array of `icon => color` pairs:
+
+```php
+// single color for the whole field's popup
+StatusField::make('Published')
+    ->icons([ /* ... */ ])
+    ->tooltip($this->status)
+    ->background('green-500')
+    ->textColor('white')
+    ->exceptOnForms()
+
+// ...or a different popup color per icon
+StatusField::make('Published')
+    ->icons([
+        'minus-circle' => $this->published == 0,
+        'clock'        => $this->pending == 1 && $this->published == 0,
+        'check-circle' => $this->pending == 0 && $this->published == 1
+    ])
+    ->tooltip([ /* ... */ ])
+    ->background([
+        'minus-circle' => 'red-500',
+        'clock'        => 'blue-500',
+        'check-circle' => 'green-500'
+    ])
+    ->textColor([
+        'minus-circle' => 'white',
+        'clock'        => 'white',
+        'check-circle' => 'gray-800'
+    ])
+    ->exceptOnForms()
+```
+
+Values for both methods are auto-detected: a Nova palette token such as `green-500` or `primary-500` is mapped to the matching theme color (and respects light/dark mode), while any other value — a hex code, `rgb()`, `hsl()`, or a named CSS color — is used as-is:
+
+```php
+->background('#16a34a')->textColor('#ffffff')
+->background('rgb(22 163 74)')
+```
+
+Set both together when you use a custom background, so the text stays readable against it.
 
 ## Contributors
 

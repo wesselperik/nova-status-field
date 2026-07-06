@@ -9,13 +9,15 @@
 
 .popper {
   --tw-text-opacity: 1;
-  color: rgba(var(--colors-white),var(--tw-text-opacity)) !important;
+  // Falls back to the default text color; the fallback is overridden per-field
+  // when an inherited --nsf-popper-text-color is set (via the textColor() method).
+  color: var(--nsf-popper-text-color, rgba(var(--colors-white),var(--tw-text-opacity))) !important;
   font-size: .7rem;
   font-weight: 700;
-  
+
   @media (prefers-color-scheme: dark) {
     --tw-text-opacity: 1;
-    color: rgba(var(--colors-gray-800),var(--tw-text-opacity)) !important;
+    color: var(--nsf-popper-text-color, rgba(var(--colors-gray-800),var(--tw-text-opacity))) !important;
   }
 }
 

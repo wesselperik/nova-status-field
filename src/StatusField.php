@@ -19,13 +19,12 @@ class StatusField extends Field
     /**
      * Define the icons to use for each status.
      * Accepts an array of icon => status value pairs.
-     * 
+     *
      * @since 2.1.0
      *
-     * @param array $icons
      * @return $this
      */
-    public function icons(array $icons = null)
+    public function icons(?array $icons = null): static
     {
         return $this->withMeta(['values' => $icons]);
     }
@@ -33,10 +32,9 @@ class StatusField extends Field
     /**
      * Add a tooltip to the field.
      *
-     * @param string|array|\BackedEnum $value
      * @return $this
      */
-    public function tooltip(string|array|\BackedEnum $value = null)
+    public function tooltip(string|array|\BackedEnum|null $value = null): static
     {
         return $this->withMeta([
             'tooltip' => ($value instanceof \BackedEnum) ? $value->value : $value,
@@ -46,52 +44,120 @@ class StatusField extends Field
     /**
      * Add some extra field information on the detail view.
      *
-     * @param string|array|\BackedEnum $value
-     * @param bool $displayTooltip
      * @return $this
      */
-    public function info(string|array|\BackedEnum $value = null, bool $displayTooltip = false)
+    public function info(string|array|\BackedEnum|null $value = null, bool $displayTooltip = false): static
     {
         return $this->withMeta([
             'info' => ($value instanceof \BackedEnum) ? $value->value : $value,
-            'display_tooltip' => $displayTooltip
+            'display_tooltip' => $displayTooltip,
         ]);
     }
 
     /**
-     * Add custom color(s) to icons.
+     * Add custom color(s) to the status icon.
      * Accepts a single color, or an array of icon => color value pairs.
-     * 
-     * @since 2.1.0
      *
-     * @param string|array $color
+     * @since 3.1.0
+     *
      * @return $this
      */
-    public function color(string|array $color = 'current')
+    public function iconColor(string|array $color = 'current'): static
     {
         return $this->withMeta(['color' => $color]);
     }
 
     /**
-     * Define whether the icon should be solid or not.
+     * Add custom color(s) to the status icon.
+     * Accepts a single color, or an array of icon => color value pairs.
      *
-     * @param bool $solid
+     * Shorthand for iconColor().
+     * 
+     * @since 2.1.0
+     *
      * @return $this
      */
-    public function solid(bool $solid = false)
+    public function color(string|array $color = 'current'): static
+    {
+        return $this->iconColor($color);
+    }
+
+    /**
+     * Define whether the icon should be solid or not.
+     *
+     * @return $this
+     */
+    public function solid(bool $solid = false): static
     {
         return $this->withMeta(['solid_icon' => $solid]);
     }
 
     /**
-     * Define the icon values to use for each status.
-     * 
-     * @deprecated since version 2.1.0. Use icons() instead.
-     * 
-     * @param array $values
+     * Set the background color of the tooltip popup.
+     * Accepts a single color, or an array of icon => color pairs.
+     *
+     * Values matching a Nova palette token (e.g. "green-500") are mapped to the
+     * corresponding theme variable so they respect Nova's light/dark palette;
+     * any other value (hex, rgb(), hsl(), named color) is used as a raw CSS color.
+     *
+     * @since 3.1.0
+     *
      * @return $this
      */
-    public function values(array $values = null)
+    public function background(string|array|null $color = null): static
+    {
+        return $this->withMeta(['background' => $this->resolveColorValue($color)]);
+    }
+
+    /**
+     * Set the text color of the tooltip popup.
+     * Accepts a single color, or an array of icon => color pairs.
+     *
+     * Uses the same value resolution as background(): Nova palette tokens are
+     * mapped to theme variables, and any other value is used as a raw CSS color.
+     *
+     * @since 3.1.0
+     *
+     * @return $this
+     */
+    public function textColor(string|array|null $color = null): static
+    {
+        return $this->withMeta(['text_color' => $this->resolveColorValue($color)]);
+    }
+
+    /**
+     * Resolve a single color, or an array of icon => color pairs, to CSS color string(s).
+     */
+    protected function resolveColorValue(string|array|null $color = null): string|array|null
+    {
+        if (is_array($color)) {
+            return array_map([self::class, 'resolveColor'], $color);
+        }
+
+        return $color === null ? null : self::resolveColor($color);
+    }
+
+    /**
+     * Resolve a color value to a CSS color string.
+     *
+     * Nova palette tokens (e.g. "green-500") become "rgba(var(--colors-green-500))";
+     * everything else is returned unchanged as a raw CSS color.
+     */
+    public static function resolveColor(string $color): string
+    {
+        return preg_match('/^[a-z]+-\d{2,3}$/', $color)
+            ? "rgba(var(--colors-{$color}))"
+            : $color;
+    }
+
+    /**
+     * Define the icon values to use for each status.
+     *
+     * @deprecated since version 2.1.0. Use icons() instead.
+     *
+     * @return $this
+     */
+    public function values(?array $values = null): static
     {
         return $this->withMeta([
             'values' => $this->iconAliases($values),
@@ -110,21 +176,17 @@ class StatusField extends Field
     /**
      * Get the icon aliases. Used by the deprecated values() method,
      * to support backwards compatibility.
-     * 
-     * @param array $values
-     * 
-     * @return array
      */
-    private function iconAliases(array $values)
+    private function iconAliases(array $values): array
     {
         $aliases = [
             'inactive' => 'x-circle',
             'active' => 'check-circle',
             'pending' => 'clock',
             'info' => 'info-circle',
-            'warning' => 'exclamation-circle', 
+            'warning' => 'exclamation-circle',
             'help' => 'question-mark-circle',
-            'disabled' => 'minus-circle'
+            'disabled' => 'minus-circle',
         ];
 
         $newValues = [];
