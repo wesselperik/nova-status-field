@@ -1,13 +1,16 @@
 <template>
     <div>
         <popper hover :content="getTooltip()">
-            <Icon :solid="this.field.solid_icon" :type="getValue()" :class="getColor()" />
+            <StatusIcon :solid="field.solid_icon" :name="getValue()" :class="getColor()" />
         </popper>
     </div>
 </template>
 
 <script>
+import StatusIcon from './StatusIcon'
+
 export default {
+    components: { StatusIcon },
     props: ['resourceName', 'field'],
     methods: {
         getValue: function() {

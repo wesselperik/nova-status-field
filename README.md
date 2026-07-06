@@ -4,7 +4,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wesselperik/nova-status-field.svg?style=flat-square)](https://packagist.org/packages/wesselperik/nova-status-field)
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
 
-### 🚀 Compatible with Laravel Nova 4.0!
+### 🚀 Compatible with Laravel Nova 4 and 5!
 
 A Laravel Nova field for displaying a status icon, with optional tooltip and info text, on index and detail pages of your models.
 This package utilizes all icons from the [Heroicons](https://heroicons.com/) icon pack (from designer [Steve Schroger](https://twitter.com/steveschoger)), which is also used in Laravel Nova.
@@ -68,6 +68,8 @@ public function fields(Request $request) {
 }
 ```
 Available icons are all [Heroicons](https://heroicons.com/) by [Steve Schroger](https://twitter.com/steveschoger). By default, the icons are used in the outline style, but you can use the `solid()` function to change to the solid style (see the example above).
+
+> **Note:** Laravel Nova 5 ships with Heroicons v2, while Nova 4 uses Heroicons v1. Some icons were renamed in v2 (for example, `mail` became `envelope`). If an icon no longer shows up after upgrading to Nova 5, check the [Heroicons v2 rename list](https://github.com/tailwindlabs/heroicons/releases/tag/v2.0.0) for its new name.
 
 Available colors are the following [TailwindCSS text colors](https://tailwindcss.com/docs/text-color) included in Laravel Nova 4, which are:
 - `primary`
